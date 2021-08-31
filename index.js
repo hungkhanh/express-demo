@@ -1,6 +1,8 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 
 const app = express();
+
 
 var users= [
   {id: 1, name: 'Thing'},
@@ -10,6 +12,9 @@ var users= [
 ];
 
 app.use(express.static('public'))
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 
 app.set('view engine', 'pug')
 app.set('views', './views')
@@ -37,6 +42,15 @@ app.get('/users/search', (req, res) => {
     users: matchedUsers,
     text: q
   });
+});
+
+app.get('/users/create', (req, res) => {
+  res.render('users/create');
+});
+
+app.post('/users/create', (req, res) => {
+  users.push(req.body);
+  res.redirect('/users');
 });
 
 app.listen(3000, (req, res) => {
