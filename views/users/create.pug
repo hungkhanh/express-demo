@@ -1,9 +1,12 @@
-h1 Create Users
-form(action="create", method="POST")
-  label Name
-  input(name="name", type="text")
+extends ../layouts/common
 
-  label Phone
-  input(name="phone", type="text")
+block content
+  h1 Create Users
+  form(action="create", method="POST")
+    label Name
+    input(name="name", type="text")
 
-  button Create 
+    label Phone
+    input(name="phone", type="text")
+
+    button Create 

@@ -1,6 +1,5 @@
-html
-  head
-    title= title
-  body
-    h1= message
-    a(href='/users') User
+extends ./layouts/common
+
+block content
+  h1= message
+  a(href='/users') User
