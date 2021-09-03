@@ -7,13 +7,12 @@ module.exports.index = function(req, res) {
   });
 };
 
-module.exports.search = (req, res) => {
+module.exports.search = (req, res) => {  
   var q = req.query.q.toLowerCase();
   var users = db.get('users').value();
   var matchedUsers = users.filter((user) => {
     return user.name.toLowerCase().indexOf(q) !== -1;
   }); 
-  
   res.render('users/index', {
     users: matchedUsers,
     text: q
@@ -36,22 +35,7 @@ module.exports.get = (req, res) => {
 
 module.exports.postCreate = (req, res) => {
   req.body.id = shortid.generate();
-  var errors = [];
-  if(!req.body.name) {
-    errors.push("Name is not empty");
-  }
 
-  if(!req.body.phone) {
-    errors.push("Phone is not empty");
-  }
-
-  if(errors.length > 0) {
-    res.render('users/create', {
-      errors: errors,
-      values: req.body
-    })
-    return;
-  }
 
   db.get('users').push(req.body).write();
   res.redirect('/users');
