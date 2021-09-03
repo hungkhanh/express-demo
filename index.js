@@ -17,7 +17,8 @@ app.use('/static', express.static('public'))
 // http://localhost:3000/static/sea.jpg
 
 app.get('/', (req, res) => {
-  res.render('index', { title: 'Aloha', message: 'Hello ' });
+  res.render('index', { title: 'AAA', message: 'Hello ' });
+  // res.sendFile(__dirname + '/views/index.html');
 });
 
 app.use('/users', userRoute);
