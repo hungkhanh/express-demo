@@ -18,5 +18,19 @@ block content
           .card-body
             h5.card-title= product.name
             p.card-text= product.description
-            p.card-title= product.price
+            p.card-title $ #{product.price}
             a.btn.btn-primary(href='/cart/add/' + product.id) Add to cart
+
+  .navigation
+    nav(aria-label='Page navigation example')
+      ul.pagination
+        li.page-item
+          a.page-link(href='/products/' + ((page - 1) === 0 ? 1 : (page - 1))) Previous
+        li.page-item
+          a.page-link(href='/products/' + page)= page
+        li.page-item
+          a.page-link(href='/products/' + (page + 1))= page + 1
+        li.page-item
+          a.page-link(href='/products/' + (page + 2))= page + 2
+        li.page-item
+          a.page-link(href='/products/' + (page + 1)) Next
