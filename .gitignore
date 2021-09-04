@@ -4,4 +4,3 @@ package.json
 public/
 db.json
 .env
-views/products/
