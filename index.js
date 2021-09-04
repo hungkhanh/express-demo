@@ -1,9 +1,12 @@
+require('dotenv').config();
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
 const userRoute = require('./routes/user.route');
 const authRoute = require('./routes/auth.route');
+const productRoute = require('./routes/product.route');
 
 const authMiddleware = require('./middlewares/auth.middleware');
 
@@ -13,11 +16,13 @@ app.use(express.static('public'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-var secretSignedCookie = "afafgafgrag";
-app.use(cookieParser(secretSignedCookie));
+app.use(cookieParser(process.env.SESSION_SECRET));
+
+// app.use(cookieParser('1324564dsad'));
 
 app.use('/users', authMiddleware.requireAuth ,userRoute);
 app.use('/auth', authRoute);
+app.use('/products', productRoute);
 
 app.set('view engine', 'pug')
 app.set('views', './views')
@@ -27,10 +32,7 @@ app.use('/static', express.static('public'))
 
 app.get('/', (req, res) => {
   res.render('index', { title: 'AAA', message: 'Hello ' });
-  // res.sendFile(__dirname + '/views/index.html');
 });
-
-
 
 app.listen(3000, (req, res) => {
   console.log('Server start on port 3000');

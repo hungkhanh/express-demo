@@ -6,7 +6,7 @@ block content
   if errors
     each error in errors
       .alert.alert-danger= error
-  form(method="POST").form-group
+  form(method="POST", enctype="multipart/form-data")
     .mb-3
       label(for="name") Name
       input.form-control#name(name="name", type="text", value=values ? values.name : "")
@@ -14,5 +14,9 @@ block content
     .mb-3
       label(for="phone") Phone
       input.form-control#phone(name="phone", type="text", value=values ? values.phone : "")
+
+    .mb-3
+      label(for="avatar") Avatar
+      input#avatar.form-control-file(name="avatar", type="file")
 
     button.btn.btn-primary Create 
