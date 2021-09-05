@@ -1,9 +1,12 @@
 const db = require('../db');
 
 module.exports.index = function(req, res, next) {
-  // get sessionId
   var sessionId = req.signedCookies.sessionId;
   var cartProductIdObject = db.get('sessions').find({ id: sessionId}).get('cart').value();
+  if(!cartProductIdObject) {
+    res.redirect('/products/1');
+    return;
+  }
   var cartProductId = Object.keys(cartProductIdObject);
   var cartProductQuantity = Object.values(cartProductIdObject);
 
